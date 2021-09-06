@@ -1,6 +1,6 @@
 # Assignment 1
 
-## Due Spetember 10th before midnight. 
+## Due September 10th before midnight. 
 
 ## Task
 
