@@ -13,14 +13,14 @@
         if(currentSlide < 0){
           currentSlide = 5 + currentSlide;
         }
-        $("img:nth-of-type(" + (currentSlide+1) + ")").fadeIn(1000);
+        $("img:nth-of-type(" + (currentSlide+1) + ")").stop().fadeIn(1000);
         return;
       }
 
       var goNext = function(){
         $("img").fadeOut();
         currentSlide = (currentSlide + 1) % 5;
-        $("img:nth-of-type(" + (currentSlide+1) + ")").fadeIn(1000);
+        $("img:nth-of-type(" + (currentSlide+1) + ")").stop().fadeIn(1000);
         return;
       }
      </script>
