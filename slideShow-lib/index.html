@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <script>
+    allImages = [];
+    function start(){
+      var hash = window.location.hash.replace("#","");
+      allImages = hash.split(",");
+      alert(allImages);
+    }
+  </script>
+</head>
+
+<body onload='start()'>
+  <div id='container'>
+  </div>
+</body>
+
+
+</html>
+
+
