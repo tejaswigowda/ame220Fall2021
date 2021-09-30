@@ -14,6 +14,9 @@
       height: 100%;
       background-repeat: no-repeat;
       background-position: 50% 50%;
+      display: block;
+      position:absolute;
+      transition: 2s;
     }
     #prev{
       position: fixed;
@@ -45,14 +48,13 @@
       allImages = hash.split(",");
       var markup = "";
       for(var i = 0; i < allImages.length; i++){
-        markup += "<div class='slide' style='background-image:url(" +
-          allImages[i] + ")'></div>"
+        markup += "<div class='slide' style='background-image:url(" + allImages[i] + ")'></div>"
       }
       document.getElementById("container").innerHTML = markup;
 
       markup = "";
       for(var i = 0; i < allImages.length; i++){
-        markup += "<button class='num'>" + (i + 1) + "</button>"
+        markup += "<button onclick='numClicked(" + i + ")' class='num'>" + (i + 1) + "</button>"
       }
       document.getElementById("numContainer").innerHTML = markup;
 
@@ -75,14 +77,22 @@
       goToCurrentSlide();
     }
 
+    var numClicked = function(n){
+      currentSlide = n;
+      goToCurrentSlide(); 
+    }
+
     var goToCurrentSlide = function(){
       var allImgObjs = document.getElementsByClassName("slide")
+      var allNumObjs = document.getElementsByClassName("num")
       for(var i = 0; i < allImgObjs.length; i++){
         if(i==currentSlide){
-          allImgObjs[i].style.display = "block";
+          allImgObjs[i].style.opacity = "1";
+          allNumObjs[i].className = "num active"; 
         }
         else{
-          allImgObjs[i].style.display = "none";
+          allImgObjs[i].style.opacity = "0";
+          allNumObjs[i].className = "num"; 
         }
       }
     }
