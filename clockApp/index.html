@@ -1,119 +1,46 @@
-<!doctype html>
+<!doctype>
 <html>
 <head>
-  <style>
-    body{
-      margin:0;
-      width: 100vw;
-      height: 100vh;
-    }
-    #frame{
-      width: 300px;
-      height: 300px;
-      border: 2px solid;
-      border-radius: 50%;
-      left: 50vw;
-      top: 50vh;
-      transform: translate(-50%, -50%);
-      position: absolute;
-      background: white;
-    }
-    #frame.night{
-      filter: invert(1);
-    }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    .num{
-      height: 20px;
-      width: 2px;
-      background: black;
-      position: absolute;
-      left: 50%;
-      transform-origin: 0px 150px;
-    }
-    #num1{
-      transform: rotate(30deg);
-    }
-    #num2{
-      transform: rotate(60deg);
-    }
-    #num3{
-      transform: rotate(90deg);
-    }
-    #num4{
-      transform: rotate(120deg);
-    }
-    #num5{
-      transform: rotate(150deg);
-    }
-    #num6{
-      transform: rotate(180deg);
-    }
-    #num7{
-      transform: rotate(210deg);
-    }
-    #num8{
-      transform: rotate(240deg);
-    }
-    #num9{
-      transform: rotate(270deg);
-    }
-    #num10{
-      transform: rotate(300deg);
-    }
-    #num11{
-      transform: rotate(330deg);
-    }
-    .hand{
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-origin: 0 0;
-    }
-    #hour{
-      width: 120px;
-      height: 2px;
-      background: red;
-    }
-    #min{
-      width: 140px;
-      height: 2px;
-      background: blue;
-    }
-    #sec{
-      width: 150px;
-      height: 2px;
-      background: green;
-    }
-  </style>
-  <script>
-    function renderClock()
-    {
-      var tz = parseFloat(document.getElementById("timezone").value);
-      var now = new Date();
-      var mssE = now.getTime();
-      now = new Date(mssE + now.getTimezoneOffset()*60*1000 + tz*60*60*1000);
-      var h = now.getHours();
-      var m = now.getMinutes();
-      var s = now.getSeconds();
- //     console.log(h,m,s, tz, mssE);
-      if(!(h >=6 && h < 18)){
-        document.getElementById("frame").className = "night";
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+      #modal1{
+        width: 100vw;
+        height: 100vh;
       }
-      else{
-        document.getElementById("frame").className = "";
+      .dropdown-content{
+        box-shadow: none;
       }
-      var sAng = (360/60)*s - 90;
-      document.getElementById("sec").style.transform = "rotate(" + sAng + "deg)"
-      var mAng = (360/60)*m - 90;
-      document.getElementById("min").style.transform = "rotate(" + mAng + "deg)"
-      var hAng = ((360/12)*h - 90) + (30 * m/60);
-      document.getElementById("hour").style.transform = "rotate(" + hAng + "deg)"
-    }
-  </script>
+    </style>
+    <script>
+      function start(){
+        $('.modal').modal();
+        $('select').formSelect();
+         var instance = M.Modal.getInstance($(".modal")[0]);
+         console.log(instance);
+      }
+      function editClicked(){
+        $('.modal').modal("open");
+        setTimeout('$(".select-dropdown").click()', 500);
+      }
+    </script>
 </head>
-<body onload='renderClock();setInterval("renderClock()", 1000)'>
 
-<select name="timezone" id="timezone">
+<body onload='start()'>
+  <div id='list'></div>
+  <div id='clock'></div>
+    <a href="javascript:editClicked()" style='position:fixed;bottom:5px;right:5px' class="btn-floating btn-large waves-effect waves-light red  modal-trigger"><i class="material-icons">edit</i></a>
+
+      <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Timezones</h4>
+      <p>Select your timezones</p>
+<select multiple name="timezone" id="timezone">
     <option value="-12">(UTC-12:00) International Date Line West</option>
     <option value="-11">(UTC-11:00) Coordinated Universal Time-11</option>
     <option value="-10">(UTC-10:00) Hawaii</option>
@@ -222,24 +149,9 @@
     <option value="13">(UTC+13:00) Samoa</option>
 </select>
 
-<div id='frame'>
-  <div class='num' id='num1'> </div>
-  <div class='num' id='num2'> </div>
-  <div class='num' id='num3'> </div>
-  <div class='num' id='num4'> </div>
-  <div class='num' id='num5'> </div>
-  <div class='num' id='num6'> </div>
-  <div class='num' id='num7'> </div>
-  <div class='num' id='num8'> </div>
-  <div class='num' id='num9'> </div>
-  <div class='num' id='num10'> </div>
-  <div class='num' id='num11'> </div>
-  <div class='num' id='num12'> </div>
 
-  <div class='hand' id='hour'> </div>
-  <div class='hand' id='min'> </div>
-  <div class='hand' id='sec'> </div>
-</div>
+    </div>
+  </div>
 
 </body>
 </html>
