@@ -8,18 +8,38 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
+      .active{
+        background: #2ab7a9;
+      }
+      #clock h1{
+        font-size: 24px;
+        text-align: center;
+      }
+      #clock iframe{
+        border:0;
+        width: 100%;
+        height: 90%;
+      }
       .listItem{
         display: block;
         width: 100%;
         height: 100px;
       }
       .listItem iframe{
-        width: 300px;
-        height: 300px;
-        transform:scale(.33);
+        width: 310px;
+        height: 310px;
+        transform:scale(.3);
         transform-origin: 0 0;
         border: 0;
         margin:0;
+      }
+      .listItem p{
+        position: relative;
+        width: calc(100% - 100px);
+        right: 0;
+        margin-left: 100px;
+        margin-top: -280px;
+        float: right;
       }
       #modal1{
         width: 100vw;
@@ -56,22 +76,33 @@
         $('.modal').modal("open");
         setTimeout('$(".select-dropdown").click()', 50);
       }
+      var selTZs;
       function modalClosed()
       {
-        /*
-        var elem = document.getElementById('timezone');
-          var instance = M.FormSelect.getInstance(elem);
-        alert(instance.getSelectedValues());
-       */
-        var selTZs = $('#timezone option:selected');
+        selTZs = $('#timezone option:selected');
+        var selTZArr = [];
+        for(var i = 0; i < selTZs.length; i++){
+          selTZArr.push({val: selTZs[i].value, text: selTZs[i].innerHTML})
+        }
+        localStorage.setItem("tzs", JSON.stringify(selTZArr));
         var markup = "";
         for(var i=0; i< selTZs.length;i++){
-          markup += "<button class='listItem'>" + 
+          markup += "<button onclick='tzSelected("+i+")' class='listItem'>" + 
             "<iframe src='clock.html#" + selTZs[i].value.split("_")[0] + "'></iframe>" 
-            "<p>" + selTZs[i].innerHTML + "</p>"
+            + "<p>" + selTZs[i].innerHTML + "</p>"
             + "</button>";
         }
         document.getElementById("list").innerHTML = markup;
+      }
+
+      function tzSelected(n)
+      {
+        $(".listItem").removeClass("active")
+        $(".listItem:nth-of-type("+(n+1)+")").addClass("active")
+        var markup = 
+             "<h1>" + selTZs[n].innerHTML + "</h1>"
+            +"<iframe src='clock.html#" + selTZs[n].value.split("_")[0] + "'></iframe>" 
+        document.getElementById("clock").innerHTML = markup;
       }
     </script>
 </head>
