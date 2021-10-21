@@ -50,7 +50,12 @@
 <script>
 function addAnimation(event){
  var aName = event.target.innerHTML;
- alert(aName);
+ //alert(aName);
+ $("#theDiv").removeClass();
+ function y(){
+   $("#theDiv").addClass("animate__animated animate__flip")
+ }
+ setTimeout(y, 20);
 }
 </script>
 <html>
