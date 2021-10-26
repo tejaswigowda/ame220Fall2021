@@ -32,6 +32,7 @@
         transform-origin: 0 0;
         border: 0;
         margin:0;
+        float:left;
       }
       .listItem p{
         position: relative;
@@ -71,6 +72,12 @@
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, {onCloseStart: modalClosed});
         $('select').formSelect();
+
+        var x = JSON.parse(localStorage.getItem("tzs"));
+        for(var i = 0; i < x.length; i++){
+          $("#timezone option[value='"+ x[i].val +"'").attr("selected", true)
+        }
+        modalClosed();
       }
       function editClicked(){
         $('.modal').modal("open");
