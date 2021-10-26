@@ -6,8 +6,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
+
+      #backButton{
+        display: none;
+      }
       .active{
         background: #2ab7a9;
       }
@@ -65,10 +70,36 @@
       .select-dropdown.dropdown-trigger{
         opacity:0;
       }
+      @media (max-width: 500px){
+        #list{
+          min-width: 100%;
+        }
+        #clock{
+          min-width: 100%;
+        }
+        #backButton{
+          display: block;
+        }
+        #clock{
+          display: none;
+        }
+        body.displayClock #clock{
+          display: block;
+        }
+        body.displayClock #list{
+          display: none;
+        }
+        body.displayClock #editButton{
+          display: none;
+        }
+      }
     </style>
     <script>
+      function backClicked()
+      {
+        $("body").removeClass("displayClock");
+      }
       function start(){
-        //$('.modal').modal();
         var elems = document.querySelectorAll('.modal');
         var instances = M.Modal.init(elems, {onCloseStart: modalClosed});
         $('select').formSelect();
@@ -104,20 +135,25 @@
 
       function tzSelected(n)
       {
+        $("body").addClass("displayClock");
         $(".listItem").removeClass("active")
         $(".listItem:nth-of-type("+(n+1)+")").addClass("active")
         var markup = 
              "<h1>" + selTZs[n].innerHTML + "</h1>"
             +"<iframe src='clock.html#" + selTZs[n].value.split("_")[0] + "'></iframe>" 
-        document.getElementById("clock").innerHTML = markup;
+        document.getElementById("clockInfo").innerHTML = markup;
       }
     </script>
 </head>
 
 <body onload='start()'>
   <div id='list'></div>
-  <div id='clock'></div>
-    <a href="javascript:editClicked()" style='position:fixed;bottom:5px;right:5px' class="btn-floating btn-large waves-effect waves-light red  modal-trigger"><i class="material-icons">edit</i></a>
+  <div id='clock'>
+    <a href="javascript:backClicked()" id='backButton' style='position:fixed;top:5px;left:5px' class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+    <div id='clockInfo'>
+    </div>
+  </div>
+    <a href="javascript:editClicked()" id='editButton' style='position:fixed;bottom:5px;right:5px' class="btn-floating btn-large waves-effect waves-light red  modal-trigger"><i class="material-icons">edit</i></a>
 
       <!-- Modal Structure -->
   <div id="modal1" class="modal">
