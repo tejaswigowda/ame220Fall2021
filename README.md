@@ -10,7 +10,7 @@ Whiteboard: https://docs.google.com/presentation/d/1rL52HOiNGgKIEjNy_17mxMp0_3Uf
 
 ------
 
-## Capaccitor Commands
+## Capacitor Commands
 
 ```
 npm install --save @capacitor/core @capacitor/cli
