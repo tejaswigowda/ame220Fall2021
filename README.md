@@ -12,6 +12,7 @@ Whiteboard: https://docs.google.com/presentation/d/1rL52HOiNGgKIEjNy_17mxMp0_3Uf
 
 ## Capaccitor Commands
 
+```
 npm install --save @capacitor/core @capacitor/cli
 
 
@@ -22,3 +23,5 @@ npx cap add ios
 
 npx cap open android
 npx cap open ios
+
+```
