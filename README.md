@@ -19,6 +19,8 @@ npm install --save @capacitor/core @capacitor/cli
 npm init @capacitor/app
 cd <new_folder>
 npm install
+npm install @capacitor/android
+npm install @capacitor/ios
 npx cap add android
 npx cap add ios
 
