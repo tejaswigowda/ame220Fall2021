@@ -16,7 +16,7 @@ Whiteboard: https://docs.google.com/presentation/d/1rL52HOiNGgKIEjNy_17mxMp0_3Uf
 npm install --save @capacitor/core @capacitor/cli
 
 
-npx @capacitor/cli create
+npm init @capacitor/app
 cd <new_folder>
 npx cap add android
 npx cap add ios
