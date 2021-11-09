@@ -3,7 +3,7 @@
 
 ## Task
 
-tart with the code handout and package it as a Windows/MacOS desktop app
+Start with the code handout and package it as a Windows/MacOS desktop app
 using Electron.js Packager(<https://github.com/electron/electron-packager>)
 
 ## Submission
